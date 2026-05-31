@@ -24,7 +24,7 @@ mcp = FastMCP("location")
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 GOOGLE_PLACES_BASE = "https://maps.googleapis.com/maps/api/place"
 GOOGLE_GEOCODING_BASE = "https://maps.googleapis.com/maps/api/geocode/json"
-CHAT_HISTORY_FILE = Path(__file__).parent / "chat_history.txt"
+CHAT_HISTORY_FILE = Path(__file__).parent.parent / "data" / "chat_history.txt"
 
 
 async def make_google_places_request(url: str, params: dict) -> dict[str, Any] | None:

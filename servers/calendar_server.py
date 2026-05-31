@@ -25,8 +25,8 @@ from googleapiclient.errors import HttpError
 mcp = FastMCP("calendar")
 
 # File paths
-PERSONA_CALENDARS_FILE = Path(__file__).parent / "persona_calendars.json"
-SERVICE_ACCOUNT_FILE = Path(__file__).parent / "service_account.json"
+PERSONA_CALENDARS_FILE = Path(__file__).parent.parent / "config" / "persona_calendars.json"
+SERVICE_ACCOUNT_FILE = Path(__file__).parent.parent / "service_account.json"
 CALENDAR_SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
 

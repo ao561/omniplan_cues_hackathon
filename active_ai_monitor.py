@@ -16,17 +16,13 @@ import os
 import httpx
 from watchfiles import awatch
 
-# Import MCP tool functions
-import sys
-sys.path.append(str(Path(__file__).parent))
-
 # Load environment
 load_dotenv()
 
 # File paths
-CHAT_HISTORY = Path(__file__).parent / "chat_history.txt"
-PREPARED_RESPONSE_FILE = Path(__file__).parent / "prepared_response.txt"
-LAST_PROCESSED_LINE = Path(__file__).parent / ".last_processed_line"
+CHAT_HISTORY = Path(__file__).parent / "data" / "chat_history.txt"
+PREPARED_RESPONSE_FILE = Path(__file__).parent / "data" / "prepared_response.txt"
+LAST_PROCESSED_LINE = Path(__file__).parent / "data" / ".last_processed_line"
 
 # Anthropic setup
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
@@ -257,7 +253,7 @@ async def execute_tool(tool_name: str, tool_input: dict):
     """Execute a tool and return the result"""
     try:
         if tool_name == "check_availability":
-            from calendar_server import check_availability
+            from servers.calendar_server import check_availability
             result = await check_availability(
                 people=tool_input["people"],
                 hours_ahead=tool_input.get("hours_ahead", 2)
@@ -265,7 +261,7 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "get_current_locations":
-            from calendar_server import get_current_locations
+            from servers.calendar_server import get_current_locations
             result = await get_current_locations(
                 people=tool_input["people"],
                 hours_ahead=tool_input.get("hours_ahead", 2)
@@ -273,7 +269,7 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "find_common_free_time":
-            from calendar_server import find_common_free_time
+            from servers.calendar_server import find_common_free_time
             result = await find_common_free_time(
                 people=tool_input["people"],
                 hours_ahead=tool_input.get("hours_ahead", 8)
@@ -281,7 +277,7 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "find_restaurants":
-            from location_server import find_restaurants
+            from servers.location_server import find_restaurants
             result = await find_restaurants(
                 latitude=tool_input["latitude"],
                 longitude=tool_input["longitude"],
@@ -291,7 +287,7 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "find_restaurants_by_address":
-            from location_server import find_restaurants_by_address
+            from servers.location_server import find_restaurants_by_address
             result = await find_restaurants_by_address(
                 address=tool_input["address"],
                 radius=tool_input.get("radius", 1500),
@@ -300,19 +296,19 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "analyze_food_preferences":
-            from location_server import analyze_food_preferences
+            from servers.location_server import analyze_food_preferences
             result = await analyze_food_preferences()
             return result
         
         elif tool_name == "geocode_address":
-            from location_server import geocode_address
+            from servers.location_server import geocode_address
             result = await geocode_address(
                 address=tool_input["address"]
             )
             return result
         
         elif tool_name == "analyze_message_sentiment":
-            from sentiment_server import analyze_message_sentiment
+            from servers.sentiment_server import analyze_message_sentiment
             result = await analyze_message_sentiment(
                 user=tool_input["user"],
                 message=tool_input["message"]
@@ -320,14 +316,14 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "get_user_food_preferences":
-            from sentiment_server import get_user_preferences
+            from servers.sentiment_server import get_user_preferences
             result = await get_user_preferences(
                 user=tool_input["user"]
             )
             return result
         
         elif tool_name == "get_group_directions":
-            from directions_server import get_group_directions
+            from servers.directions_server import get_group_directions
             result = await get_group_directions(
                 restaurant_name_or_address=tool_input["restaurant_name_or_address"],
                 travel_mode=tool_input.get("travel_mode", "walking")
@@ -335,14 +331,14 @@ async def execute_tool(tool_name: str, tool_input: dict):
             return result
         
         elif tool_name == "get_travel_time_summary":
-            from directions_server import get_travel_time_summary
+            from servers.directions_server import get_travel_time_summary
             result = await get_travel_time_summary(
                 restaurant_name_or_address=tool_input["restaurant_name_or_address"]
             )
             return result
         
         elif tool_name == "list_group_members":
-            from directions_server import list_group_members
+            from servers.directions_server import list_group_members
             result = await list_group_members()
             return result
         

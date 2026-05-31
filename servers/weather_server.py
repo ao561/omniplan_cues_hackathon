@@ -18,7 +18,7 @@ from mcp.server.fastmcp import FastMCP
 # Load .env from same directory as this file
 # ---------------------------------------------------------
 HERE = Path(__file__).resolve().parent
-load_dotenv(HERE / ".env")
+load_dotenv(HERE.parent / ".env")
 
 OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
 if not OPENWEATHER_API_KEY:

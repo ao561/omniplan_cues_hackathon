@@ -26,7 +26,7 @@ load_dotenv()
 mcp = FastMCP("sentiment")
 
 # File paths
-USER_PROFILES_FILE = Path(__file__).parent / "user_food_profiles.json"
+USER_PROFILES_FILE = Path(__file__).parent.parent / "data" / "user_food_profiles.json"
 
 # Anthropic setup
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")

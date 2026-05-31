@@ -26,10 +26,10 @@ load_dotenv()
 mcp = FastMCP("chat-monitor")
 
 # File paths
-CHAT_HISTORY = Path(__file__).parent / "chat_history.txt"
-PREPARED_RESPONSE_FILE = Path(__file__).parent / "prepared_response.txt"
-CONVERSATION_SUMMARY_FILE = Path(__file__).parent / ".conversation_summary.json"
-LAST_TRIGGER_LINE = Path(__file__).parent / ".last_trigger_line"
+CHAT_HISTORY = Path(__file__).parent.parent / "data" / "chat_history.txt"
+PREPARED_RESPONSE_FILE = Path(__file__).parent.parent / "data" / "prepared_response.txt"
+CONVERSATION_SUMMARY_FILE = Path(__file__).parent.parent / "data" / ".conversation_summary.json"
+LAST_TRIGGER_LINE = Path(__file__).parent.parent / "data" / ".last_trigger_line"
 
 # Trigger word
 TRIGGER_WORD = "@ai"

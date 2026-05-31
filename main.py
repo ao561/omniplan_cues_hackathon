@@ -34,9 +34,9 @@ async def startup_event():
     print("Starting Active AI Monitor...")
     thread = threading.Thread(target=start_ai_monitor, daemon=True)
     thread.start()
-HISTORY_FILE = "chat_history.txt"
-USER_PROFILES_FILE = "user_food_profiles.json"
-PERSONA_CALENDARS_FILE = "persona_calendars.json"
+HISTORY_FILE = "data/chat_history.txt"
+USER_PROFILES_FILE = "data/user_food_profiles.json"
+PERSONA_CALENDARS_FILE = "config/persona_calendars.json"
 SERVICE_ACCOUNT_FILE = "service_account.json"
 CALENDAR_SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
 
@@ -189,7 +189,7 @@ def process_food_profile_update(user: str, message: str):
 # ---------------- WEBSOCKET HANDLER ----------------
 @app.get("/")
 async def get():
-    return FileResponse("index.html")
+    return FileResponse("static/index.html")
 
 
 @app.post("/send_message")
